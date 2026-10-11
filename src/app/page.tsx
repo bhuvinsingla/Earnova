@@ -1,69 +1,234 @@
-import Image from "next/image";
+import Link from "next/link";
+import { LedgerPreview } from "@/components/LedgerPreview";
+import { audiences, marketStats, services, tests } from "@/lib/site";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <main>
+      <section className="ruled border-b border-line">
+        <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 py-16 md:px-8 md:py-24 lg:grid-cols-[1.05fr_0.95fr]">
+          <div>
+            <p className="text-xs tracking-[0.2em] text-saffron uppercase">
+              A firm for gig work in India
+            </p>
+            <h1 className="mt-4 max-w-xl font-serif text-5xl leading-[0.95] tracking-tight text-ink sm:text-6xl lg:text-7xl">
+              What did the work actually pay?
+            </h1>
+            <p className="mt-6 max-w-lg text-lg leading-8 text-muted">
+              Delivery partners, drivers, freelancers, home-service
+              professionals, and warehouse workers power enormous platforms.
+              Earnova helps them earn more, lose less, and keep more control —
+              starting with a weekly account, not another app.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link
+                href="/services"
+                className="rounded-full bg-forest px-5 py-3 text-sm text-paper hover:bg-[#1c4a3d]"
+              >
+                See the services
+              </Link>
+              <Link
+                href="/approach"
+                className="rounded-full border border-ink/15 px-5 py-3 text-sm hover:border-ink/40"
+              >
+                How a pilot starts
+              </Link>
+            </div>
+          </div>
+          <LedgerPreview />
+        </div>
+      </section>
+
+      <section className="border-b border-line" aria-labelledby="market-heading">
+        <div className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-20">
+          <div className="max-w-2xl">
+            <p className="text-xs tracking-[0.2em] text-muted uppercase">
+              The market
+            </p>
+            <h2
+              id="market-heading"
+              className="mt-3 font-serif text-4xl tracking-tight sm:text-5xl"
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+              Scale and pressure are established. Willingness to pay is not.
+            </h2>
+          </div>
+          <dl className="mt-10 grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-3">
+            {marketStats.map((stat) => (
+              <div key={stat.figure} className="bg-card px-6 py-8">
+                <dt className="font-serif text-3xl tracking-tight sm:text-4xl">
+                  {stat.figure}
+                </dt>
+                <dd className="mt-3 text-sm leading-6 text-ink">{stat.label}</dd>
+                <dd className="mt-1 text-xs text-muted">{stat.detail}</dd>
+              </div>
+            ))}
+          </dl>
+          <p className="mt-6 max-w-3xl text-sm leading-6 text-muted">
+            Research on Indian platform workers keeps returning to the same
+            pressures: unstable income, fuel and operating costs, account
+            deactivation, safety, and thin social protection. A nationwide
+            survey reported in September 2026 also flagged extreme heat and
+            gaps in safety training and insurance. Registration and welfare
+            schemes are growing. Access to them is not automatic.
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      <section className="bg-forest text-paper">
+        <div className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-24">
+          <p className="text-xs tracking-[0.2em] text-[#9db5ab] uppercase">
+            The question worth asking
+          </p>
+          <p className="mt-4 max-w-3xl font-serif text-3xl leading-tight tracking-tight sm:text-5xl">
+            Can we help someone earn more, lose less, or gain control — and
+            give them a strong reason to keep coming back?
+          </p>
+          <p className="mt-6 max-w-2xl text-base leading-7 text-[#d7e4de]">
+            The useful question is not “what app can we build for gig workers?”
+            A large group of people with a serious problem is not automatically
+            a good market. We need a way to reach them, deliver value, and get
+            paid without making their situation worse.
+          </p>
         </div>
-      </main>
-    </div>
+      </section>
+
+      <section className="border-b border-line" aria-labelledby="services-heading">
+        <div className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-20">
+          <div className="flex flex-wrap items-end justify-between gap-6">
+            <div className="max-w-xl">
+              <p className="text-xs tracking-[0.2em] text-muted uppercase">
+                Services
+              </p>
+              <h2
+                id="services-heading"
+                className="mt-3 font-serif text-4xl tracking-tight sm:text-5xl"
+              >
+                Three directions. One place to start.
+              </h2>
+            </div>
+            <Link
+              href="/services"
+              className="text-sm underline decoration-saffron underline-offset-4"
+            >
+              Read each service
+            </Link>
+          </div>
+          <div className="mt-10 grid gap-5 lg:grid-cols-3">
+            {services.map((service) => (
+              <article
+                key={service.id}
+                className={`flex flex-col rounded-2xl border bg-card p-6 ${
+                  service.preferred ? "border-saffron" : "border-line"
+                }`}
+              >
+                <div className="flex items-center justify-between gap-3">
+                  <span className="font-serif text-sm text-muted">
+                    {service.number}
+                  </span>
+                  {service.preferred ? (
+                    <span className="rounded-full bg-[#fde8df] px-3 py-1 text-[11px] tracking-wide text-saffron uppercase">
+                      Start here
+                    </span>
+                  ) : null}
+                </div>
+                <h3 className="mt-4 font-serif text-2xl leading-tight tracking-tight">
+                  {service.name}
+                </h3>
+                <p className="mt-3 flex-1 text-sm leading-6 text-muted">
+                  {service.summary}
+                </p>
+                <p className="mt-6 border-t border-line pt-4 font-serif text-lg leading-snug">
+                  “{service.question}”
+                </p>
+                <Link
+                  href={`/services#${service.id}`}
+                  className="mt-5 text-sm underline decoration-saffron underline-offset-4"
+                >
+                  How it works
+                </Link>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-b border-line" aria-labelledby="pilot-heading">
+        <div className="mx-auto grid max-w-6xl gap-12 px-5 py-16 md:px-8 md:py-20 lg:grid-cols-2">
+          <div>
+            <p className="text-xs tracking-[0.2em] text-muted uppercase">
+              Where we begin
+            </p>
+            <h2
+              id="pilot-heading"
+              className="mt-3 font-serif text-4xl tracking-tight sm:text-5xl"
+            >
+              Twenty riders. One locality. A weekly report.
+            </h2>
+            <p className="mt-5 text-base leading-7 text-muted">
+              We would not build an app yet. With consent, we help delivery
+              riders record payouts, hours, kilometres, fuel, and other costs.
+              Each week they get their actual net earnings and the clearest
+              chances to improve them.
+            </p>
+            <Link
+              href="/approach"
+              className="mt-6 inline-block text-sm underline decoration-saffron underline-offset-4"
+            >
+              The full method
+            </Link>
+          </div>
+          <ol className="space-y-4">
+            {tests.map((test) => (
+              <li
+                key={test.number}
+                className="rounded-2xl border border-line bg-card p-5"
+              >
+                <p className="text-xs tracking-[0.16em] text-saffron uppercase">
+                  Test {test.number}
+                </p>
+                <h3 className="mt-2 font-serif text-2xl">{test.title}</h3>
+                <p className="mt-2 text-sm leading-6 text-muted">{test.text}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      <section aria-labelledby="clients-heading">
+        <div className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-20">
+          <p className="text-xs tracking-[0.2em] text-muted uppercase">
+            Who it is for
+          </p>
+          <h2
+            id="clients-heading"
+            className="mt-3 max-w-2xl font-serif text-4xl tracking-tight sm:text-5xl"
+          >
+            Workers first. Partners where the money already moves.
+          </h2>
+          <ul className="mt-8 flex flex-wrap gap-3">
+            {audiences.map((audience) => (
+              <li
+                key={audience}
+                className="rounded-full border border-line bg-card px-4 py-2 text-sm"
+              >
+                {audience}
+              </li>
+            ))}
+          </ul>
+          <p className="mt-8 max-w-3xl text-base leading-7 text-muted">
+            Fleet operators, insurers, aggregators, and public institutions may
+            be the ones who can pay — especially for benefits work, where
+            government schemes are often free to the worker. That only holds if
+            the service is useful to the person doing the work.
+          </p>
+          <Link
+            href="/contact"
+            className="mt-8 inline-flex rounded-full bg-saffron px-5 py-3 text-sm text-white hover:bg-[#c2410c]"
+          >
+            Talk about a locality or a fleet
+          </Link>
+        </div>
+      </section>
+    </main>
   );
 }
