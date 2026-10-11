@@ -1,6 +1,14 @@
+import Image from "next/image";
 import Link from "next/link";
+import { CategoryIcon } from "@/components/Icons";
 import { LedgerPreview } from "@/components/LedgerPreview";
-import { audiences, marketStats, services, tests } from "@/lib/site";
+import {
+  audiences,
+  marketStats,
+  serviceCategories,
+  services,
+  tests,
+} from "@/lib/site";
 
 export default function Home() {
   return (
@@ -36,6 +44,30 @@ export default function Home() {
             </div>
           </div>
           <LedgerPreview />
+        </div>
+      </section>
+
+      <section className="border-b border-line">
+        <div className="mx-auto grid max-w-6xl items-center gap-8 px-5 py-10 md:px-8 lg:grid-cols-[1.4fr_0.8fr]">
+          <figure className="group overflow-hidden rounded-3xl">
+            <Image
+              src="/earnova-street.jpg"
+              alt="A delivery rider paused on a scooter along a lit evening street"
+              width={1600}
+              height={900}
+              priority
+              className="h-80 w-full object-cover transition duration-700 ease-out group-hover:scale-105 sm:h-[28rem]"
+            />
+          </figure>
+          <figure className="group overflow-hidden rounded-3xl">
+            <Image
+              src="/earnova-costs.jpg"
+              alt="A notebook, a bottle of oil, a tape, and keys on a work table"
+              width={1200}
+              height={900}
+              className="h-80 w-full object-cover transition duration-700 ease-out group-hover:scale-105 sm:h-[28rem]"
+            />
+          </figure>
         </div>
       </section>
 
@@ -103,49 +135,52 @@ export default function Home() {
                 id="services-heading"
                 className="mt-3 font-serif text-4xl tracking-tight sm:text-5xl"
               >
-                Three directions. One place to start.
+                A menu for earning more, losing less, and staying in control.
               </h2>
             </div>
             <Link
               href="/services"
               className="text-sm underline decoration-saffron underline-offset-4"
             >
-              Read each service
+              Open the full list
             </Link>
           </div>
-          <div className="mt-10 grid gap-5 lg:grid-cols-3">
-            {services.map((service) => (
+          <div className="mt-10 grid gap-5 md:grid-cols-2">
+            {serviceCategories.map((category) => (
               <article
-                key={service.id}
-                className={`flex flex-col rounded-2xl border bg-card p-6 ${
-                  service.preferred ? "border-saffron" : "border-line"
-                }`}
+                key={category.id}
+                className="group rounded-2xl border border-line bg-card p-6 transition duration-300 hover:-translate-y-1 hover:shadow-[0_18px_40px_rgba(28,22,18,0.08)]"
               >
-                <div className="flex items-center justify-between gap-3">
-                  <span className="font-serif text-sm text-muted">
-                    {service.number}
+                <div className="flex items-center gap-3">
+                  <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-forest text-paper transition duration-300 group-hover:bg-saffron">
+                    <CategoryIcon id={category.id} className="h-6 w-6" />
                   </span>
-                  {service.preferred ? (
-                    <span className="rounded-full bg-[#fde8df] px-3 py-1 text-[11px] tracking-wide text-saffron uppercase">
-                      Start here
-                    </span>
-                  ) : null}
+                  <h3 className="font-serif text-2xl tracking-tight">
+                    {category.label}
+                  </h3>
                 </div>
-                <h3 className="mt-4 font-serif text-2xl leading-tight tracking-tight">
-                  {service.name}
-                </h3>
-                <p className="mt-3 flex-1 text-sm leading-6 text-muted">
-                  {service.summary}
+                <p className="mt-2 text-sm leading-6 text-muted">
+                  {category.line}
                 </p>
-                <p className="mt-6 border-t border-line pt-4 font-serif text-lg leading-snug">
-                  “{service.question}”
-                </p>
-                <Link
-                  href={`/services#${service.id}`}
-                  className="mt-5 text-sm underline decoration-saffron underline-offset-4"
-                >
-                  How it works
-                </Link>
+                <ul className="mt-5 space-y-3">
+                  {services
+                    .filter((service) => service.category === category.id)
+                    .map((service) => (
+                      <li key={service.id}>
+                        <Link
+                          href={`/services#${service.id}`}
+                          className="group block"
+                        >
+                          <span className="font-medium group-hover:text-saffron">
+                            {service.name}
+                          </span>
+                          <span className="mt-0.5 block text-sm leading-6 text-muted">
+                            {service.outcome}
+                          </span>
+                        </Link>
+                      </li>
+                    ))}
+                </ul>
               </article>
             ))}
           </div>

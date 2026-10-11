@@ -35,6 +35,11 @@ export function SiteFooter() {
                 Contact
               </Link>
             </li>
+            <li>
+              <Link href="/platform" className="hover:text-white">
+                Workspace platform
+              </Link>
+            </li>
           </ul>
         </div>
         <div>

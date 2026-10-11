@@ -29,8 +29,17 @@ const empty: Fields = {
   message: "",
 };
 
-export function ContactForm() {
-  const [fields, setFields] = useState<Fields>(empty);
+export function ContactForm({
+  requestedService,
+}: {
+  requestedService?: string;
+}) {
+  const [fields, setFields] = useState<Fields>({
+    ...empty,
+    message: requestedService
+      ? `I want the ${requestedService} service.`
+      : "",
+  });
   const [error, setError] = useState("");
   const [draft, setDraft] = useState("");
 
@@ -103,6 +112,12 @@ export function ContactForm() {
       className="rounded-2xl border border-line bg-card p-6 sm:p-8"
       noValidate
     >
+      {requestedService ? (
+        <p className="mb-5 rounded-xl bg-[#fde8df] px-4 py-3 text-sm text-ink">
+          You are asking about <strong>{requestedService}</strong>. Add your
+          details and we will reply about that service.
+        </p>
+      ) : null}
       <div className="grid gap-5 sm:grid-cols-2">
         <label className="block text-sm">
           <span className="text-muted">Name</span>

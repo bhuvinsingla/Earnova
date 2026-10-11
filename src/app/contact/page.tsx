@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { ContactForm } from "@/components/ContactForm";
+import { Suspense } from "react";
+import { RequestedServiceForm } from "@/components/RequestedServiceForm";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -48,7 +49,15 @@ export default function ContactPage() {
               ))}
             </ul>
           </div>
-          <ContactForm />
+          <Suspense
+            fallback={
+              <div className="rounded-2xl border border-line bg-card p-8 text-sm text-muted">
+                Loading the form…
+              </div>
+            }
+          >
+            <RequestedServiceForm />
+          </Suspense>
         </div>
       </section>
     </main>

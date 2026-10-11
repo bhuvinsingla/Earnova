@@ -9,6 +9,7 @@ const links = [
   { href: "/services", label: "Services" },
   { href: "/approach", label: "Approach" },
   { href: "/contact", label: "Contact" },
+  { href: "/platform", label: "Workspace platform" },
 ];
 
 export function SiteHeader() {
@@ -27,7 +28,7 @@ export function SiteHeader() {
           <span className="text-saffron">.</span>
         </Link>
 
-        <nav className="hidden items-center gap-8 md:flex" aria-label="Primary">
+        <nav className="hidden items-center gap-6 md:flex" aria-label="Primary">
           {links.map((link) => {
             const active = pathname === link.href;
             return (

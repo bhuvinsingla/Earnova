@@ -31,54 +31,179 @@ export const audiences = [
   "Warehouse gig workers",
 ] as const;
 
+export const serviceCategories = [
+  {
+    id: "earn",
+    label: "Earn more",
+    line: "Keep more of what the shift already paid.",
+  },
+  {
+    id: "save",
+    label: "Lose less",
+    line: "Name the costs that quietly eat a payout.",
+  },
+  {
+    id: "control",
+    label: "Stay in control",
+    line: "Benefits, papers, claims, and an account that stays open.",
+  },
+  {
+    id: "partners",
+    label: "For fleets and partners",
+    line: "The same picture, funded by whoever already carries the cost.",
+  },
+] as const;
+
 export const services = [
   {
-    id: "income",
-    number: "01",
-    name: "Take-home income optimizer",
-    preferred: true,
-    summary:
-      "A weekly account of what a rider or driver actually kept, after fuel, maintenance, waiting time, and incentives.",
-    question: "How much did I actually earn today?",
-    why: "The worker already cares about this number. Gross payouts hide the costs that decide whether a shift was worth it.",
-    risk: "Platform data is hard to reach, and it is not obvious that workers will pay for a report.",
-    does: [
-      "Record daily payouts, hours, kilometres, fuel, and other operating costs — with consent.",
-      "Show net earnings for the week, not the platform’s gross figure.",
-      "Point to the hours, places, and platform mix that improved or hurt take-home pay, using that person’s own data.",
-    ],
+    id: "take-home",
+    category: "earn",
+    name: "Weekly take-home report",
+    outcome: "See what the week actually left in hand.",
+    detail:
+      "Payouts, fuel, maintenance, waiting time, and incentives become one net figure a rider can use on Monday.",
+    forWhom: "Delivery partners and drivers",
+    featured: true,
   },
   {
-    id: "benefits",
-    number: "02",
-    name: "Benefits and claims service",
-    preferred: false,
-    summary:
-      "Help with eligibility, documents, welfare schemes, accident insurance, and payout disputes.",
-    question: "Did this actually get resolved?",
-    why: "The value is a completed claim or a benefit that arrives, not a list of schemes on a screen.",
-    risk: "Rules differ by state and scheme. Many public schemes are free, so the payer may need to be an employer, aggregator, insurer, or institution.",
-    does: [
-      "Work out which registrations and schemes a worker may qualify for.",
-      "Keep the documents those schemes actually ask for.",
-      "Follow accident-insurance and payout-dispute claims through to an outcome.",
-    ],
+    id: "hours-places",
+    category: "earn",
+    name: "Best hours and places",
+    outcome: "Work the shifts that pay you, and skip the ones that only look busy.",
+    detail:
+      "Your own hours and localities, compared week to week, so the next roster follows the money.",
+    forWhom: "Riders and drivers",
+    featured: false,
   },
   {
-    id: "purchasing",
-    number: "03",
-    name: "Worker purchasing network",
-    preferred: false,
-    summary:
-      "Pooled buying for tyres, engine oil, repairs, mobile data, protective gear, and vehicle maintenance.",
-    question: "Is this cheaper every time I need it?",
-    why: "Savings are tangible and they repeat. More members can mean better prices, if suppliers offer real volume discounts.",
-    risk: "Garages, dealers, and existing discount schemes may already cover this. Group buying by itself is not a defensible business.",
-    does: [
-      "Aggregate demand for costs workers already pay.",
-      "Negotiate with suppliers who will put a lower price in writing.",
-      "Stay with purchases that recur, so the saving shows up again next month.",
-    ],
+    id: "platform-mix",
+    category: "earn",
+    name: "Platform mix",
+    outcome: "Know which apps, together, left more money after costs.",
+    detail:
+      "Swiggy, Zomato, Uber, Rapido, and the rest, scored on take-home pay rather than on order count.",
+    forWhom: "Anyone on more than one app",
+    featured: false,
+  },
+  {
+    id: "incentive-check",
+    category: "earn",
+    name: "Incentive check",
+    outcome: "Tell a bonus that survives the shift from one that disappears into fuel.",
+    detail:
+      "We put the incentive next to the kilometres, waiting, and extra hours it actually required.",
+    forWhom: "Riders chasing targets",
+    featured: false,
+  },
+  {
+    id: "cost-audit",
+    category: "save",
+    name: "Running-cost audit",
+    outcome: "See fuel, repairs, data, and dead kilometres in rupees.",
+    detail:
+      "A plain list of what left the pocket, so the biggest leak is obvious before the next refill.",
+    forWhom: "Anyone who pays to stay on the road",
+    featured: false,
+  },
+  {
+    id: "buying-circle",
+    category: "save",
+    name: "Worker buying circle",
+    outcome: "Pay less for the things you already buy every month.",
+    detail:
+      "Tyres, engine oil, repairs, mobile data, and protective gear, priced for a group that purchases them again and again.",
+    forWhom: "Riders, drivers, and small fleets",
+    featured: true,
+  },
+  {
+    id: "idle-time",
+    category: "save",
+    name: "Idle-time review",
+    outcome: "Count the waiting nobody pays for.",
+    detail:
+      "Hours between orders and empty kilometres, turned into a number you can act on the following week.",
+    forWhom: "Delivery partners and drivers",
+    featured: false,
+  },
+  {
+    id: "benefits-desk",
+    category: "control",
+    name: "Benefits desk",
+    outcome: "Find the schemes you can actually qualify for.",
+    detail:
+      "Registration, eligibility, and the welfare routes that apply to your work, followed until something is in motion.",
+    forWhom: "Gig workers and their families",
+    featured: false,
+  },
+  {
+    id: "papers",
+    category: "control",
+    name: "Papers in order",
+    outcome: "Have the documents ready before a scheme or insurer asks.",
+    detail:
+      "The papers that stall a benefit or a claim, collected once and kept where you can reach them.",
+    forWhom: "Workers starting a registration or a claim",
+    featured: false,
+  },
+  {
+    id: "claims",
+    category: "control",
+    name: "Claims that close",
+    outcome: "Take an accident or a missing payout through to an outcome.",
+    detail:
+      "Insurance claims and payout disputes, handled until they are paid, refused with a reason, or clearly stuck.",
+    forWhom: "Workers, fleets, and insurers",
+    featured: true,
+  },
+  {
+    id: "account-appeal",
+    category: "control",
+    name: "Account appeal support",
+    outcome: "When an app switches you off, build the case to get back on.",
+    detail:
+      "What happened, what the platform asked for, and a clear appeal. We prepare the case. We do not promise the app will restore the account.",
+    forWhom: "Partners facing deactivation",
+    featured: false,
+  },
+  {
+    id: "cover-check",
+    category: "control",
+    name: "Cover and safety check",
+    outcome: "Know whether insurance and basic safety cover are actually in place.",
+    detail:
+      "Heat, training gaps, and missing insurance, checked against the work you do so the hole is visible before an accident.",
+    forWhom: "Riders, drivers, and warehouse workers",
+    featured: false,
+  },
+  {
+    id: "fleet-brief",
+    category: "partners",
+    name: "Fleet earnings brief",
+    outcome: "See a whole locality the way each rider sees payday.",
+    detail:
+      "Net earnings across a fleet or a zone, so operators spot the shifts and costs that push people out.",
+    forWhom: "Fleet operators",
+    featured: true,
+  },
+  {
+    id: "partner-claims",
+    category: "partners",
+    name: "Partner claims desk",
+    outcome: "Give your riders a claims path someone is paid to finish.",
+    detail:
+      "A desk fleets, insurers, and institutions can fund, because the worker receives the benefit or the payout.",
+    forWhom: "Fleets, insurers, and institutions",
+    featured: false,
+  },
+  {
+    id: "retention",
+    category: "partners",
+    name: "Retention picture",
+    outcome: "See which earnings leaks show up as people leaving.",
+    detail:
+      "Fuel, idle time, weak incentives, and unpaid repairs, set beside who stopped logging in.",
+    forWhom: "Fleet operators and aggregators",
+    featured: false,
   },
 ] as const;
 
